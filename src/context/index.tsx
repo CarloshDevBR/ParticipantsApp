@@ -1,8 +1,11 @@
 import { createContext, useContext, useState } from 'react';
 
+import { Alert } from 'react-native';
+
 import { Participant } from '../types';
 
 import { RemovesTheItemFromTheList } from '../functions/RemovesTheItemFromTheList';
+import { FindItemInList } from '../functions/FindItemInList';
 
 import { defaultParticipantsContext } from './defaults';
 
@@ -18,6 +21,12 @@ export const ProviderParticipant = ({ children }: { children: React.ReactNode })
   const [participants, setParticipants] = useState<Participant[]>([]);
 
   const addNewParticipant = (participant: Participant): void => {
+    if (!participant.title) return Alert.alert('Nada Adicionado', 'Digite um nome de um participante');
+
+    const repeatParticipant = FindItemInList({ data: participants, callBack: (item) => item.title === participant.title });
+
+    if (repeatParticipant) return Alert.alert('Participante Existe', 'Já existe um participante com esse nome na lista.');
+
     setParticipants([...participants, participant]);
   };
 
