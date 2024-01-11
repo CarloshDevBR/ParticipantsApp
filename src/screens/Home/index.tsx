@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { ScrollView, View } from 'react-native';
+import { View } from 'react-native';
 
 import { StatusBar } from 'expo-status-bar';
 
@@ -16,7 +16,7 @@ export default function Home() {
   const isVisibleBorder = participants.length > 0;
 
   return (
-    <ScrollView className="flex-1 bg-purple-950 pt-10 px-6">
+    <View className="flex-1 bg-purple-950 pt-10 px-6 pb-2">
       <StatusBar style="light" />
 
       <InfoEvent />
@@ -37,6 +37,6 @@ export default function Home() {
       {isVisibleBorder && <View className="border border-gray-900 rounded-sm" />}
 
       <ListParticipant data={participants} />
-    </ScrollView>
+    </View>
   );
 }
